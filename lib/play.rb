@@ -1,40 +1,38 @@
-def input_to_index(input)
-  input.to_i - 1
-end 
-
-#if index is valid...
-def valid_move?(number_entered, board)
-  number_entered.between?(0, 8) && !(position_taken?(board, number_entered))
-end
-#if index is valid...make the move for index
-def move(array, index, name = "X")
-  array[index] = name
-end
-#if index is valid...show the board
-def position_taken?(board, answer)
-  board[answer] != " " 
-end
-
+# Helper Methods
 def display_board(board)
-   puts " #{board[0]} | #{board[1]} | #{board[2]} "
-   puts "-----------"
-   puts " #{board[3]} | #{board[4]} | #{board[5]} "
-   puts "-----------"
-   puts " #{board[6]} | #{board[7]} | #{board[8]} "
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+end
+
+def input_to_index(user_input)
+  user_input.to_i - 1
+end
+
+def move(board, index, current_player = "X")
+  board[index] = current_player
+end
+
+def position_taken?(board, location)
+  board[location] != " " && board[location] != ""
+end
+
+def valid_move?(board, index)
+  index.between?(0,8) && !position_taken?(board, index)
 end
 
 def turn(board)
-    puts "Please enter 1-9:"
-    answer = gets.chomp
-    answer = input_to_index(answer)
-    if valid_move?(answer, board)
-      move(board, answer)
-      display_board(board)
-      #turn(board)
-    else
-      puts "That is an invalid entry!"
-      turn(board)
-    end 
+  puts "Please enter 1-9:"
+  input = gets.strip
+  index = input_to_index(input)
+  if valid_move?(board, index)
+    move(board, index)
+    display_board(board)
+  else
+    turn(board)
+  end
 end
 
 def play(board)
@@ -49,11 +47,18 @@ def play(board)
   end
 end
 
-#else ask for input again until you get valid input
-#_________________________________________________
+# Define your play method below
+# Define your play method below
 
-board = ["X"," "," "," "," "," "," "," "," "]
-puts "Welcome to Tic Tac Toe!"
-puts display_board(board)
-#turn(board)
-play(board)
+def play(board)
+i = 0
+while i < 9
+  i += 1
+  turn(board)
+end
+end
+
+
+
+
+
