@@ -58,3 +58,11 @@ while i < 9
 end
 end
 
+
+board = ["X"," "," "," "," "," "," "," "," "]
+puts "Welcome to Tic Tac Toe!"
+puts display_board(board)
+#turn(board)
+play(board)
+
+
